@@ -1,5 +1,0 @@
-n = int(input())
-nums = list(map(int , input().split())) 
-squares = map(lambda x: x **2 , nums) 
-result = sum(squares)
-print (result) 
