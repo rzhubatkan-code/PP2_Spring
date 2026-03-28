@@ -10,7 +10,7 @@ with open(file , "r") as f: # Check new line
     print(f.read()) 
 
 backup = "file1_backup.txt" # Copy 
-shutil.copy(filename , backup)
+shutil.copy(file , backup)
 
 delete = "file1_backup.txt" 
 

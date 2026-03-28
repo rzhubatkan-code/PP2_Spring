@@ -16,3 +16,8 @@ class Student(Person):
 
 x = Student("Mike", "Olsen", 2024)
 x.welcome()
+
+class Student: 
+  def __init__(self , name, age)
+    self.name=name
+    self.age=age
