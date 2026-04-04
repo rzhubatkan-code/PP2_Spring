@@ -1,4 +1,2 @@
 Hello World !
 Hello Python ! 
-The new line
-The new line
