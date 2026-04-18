@@ -19,22 +19,23 @@ BEGIN
         IF length(p_phones[i]) >= 5 THEN
             INSERT INTO contacts (name , phone) VALUES (p_names[i], p_phones[i]);
          ELSE
-       RAISE NOTICE 'VALID %' , p_names[i] , p_phones[i];
+       RAISE NOTICE 'Invalid data % (phone %)' , p_names[i] , p_phones[i];
          END IF;
     END LOOP;
 END;$$;
 
 CREATE OR REPLACE PROCEDURE delete_contact(p_search VARCHAR)
-LANGUAGE plpgsql AS $$BEGIN
+LANGUAGE plpgsql AS $$
+BEGIN
     DELETE FROM contacts WHERE name = p_seacrh OR phone = p_search;
 END;$$;
 
 CREATE OR REPLACE PROCEDURE delete_contact(p_search VARCHAR)
-LANGUAGE plpgsql AS $$
+LANGUAGE plpgsql AS $$BEGIN
     DELETE FROM contacts WHERE name = p_search OR phone = p_search;
 EXCEPTION
     WHEN OTHERS THEN
-        RAISE NOTICE 'ERROR' , SQLERRM;
+        RAISE NOTICE 'ERROR %' , SQLERRM;
 END;$$;
 
 

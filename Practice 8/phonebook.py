@@ -26,32 +26,32 @@ def main():
             if user_choice == "1":
                 pattern = input("Pattern")
                 cursor.execute("SELECT * FROM get_contacts_by_pattern(%s)", (pattern,))
-                rows = cur.fetchall()
+                rows = cursor.fetchall()
                 for row in rows:
                     print(f"name: {row[0]}, phone: {row[1]}")
             elif user_choice == "2":
                 name = input("name")
                 phone = input("phone")
-                cursor.execute("CALL upsert_contact(%s, 5s)", (name , phone))
-                conn.commit()
+                cursor.execute("CALL upsert_contact(%s, %s)", (name , phone))
+                connection.commit()
                 print("done")
             elif user_choice == '3':
                 names = ['Adil' , 'Arman' , 'Aya']
                 phones = ['87071111223', '87087895667', '123']
                 cursor.execute("CALL insert_members(%s, %s)", (names , phones))
-                conn.commit()
+                connection.commit()
                 print("done")
             elif user_choice =='4':
                 limit = int(input("length"))
                 offset= int(input("step"))
                 cursor.execute("SELECT * FROM get_contacts_paged(%s, %s)", (limit, offset))
-                rows = cur.fetchall()
+                rows = cursor.fetchall()
                 for row in rows: print(f"Name {row[0]}, Phone {row[1]}")
 
             elif user_choice == '5':
                 search = input("name or phone")
                 cursor.execute("CALL delete_contact(%s)", (search,))
-                conn.commit()
+                connection.commit()
                 print("Delete")
 
             elif user_choice == '0':
@@ -68,4 +68,4 @@ def main():
           
 
 if __name__ == "__main__":
-    main()
+    main()     
