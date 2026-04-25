@@ -22,6 +22,8 @@ SCREEN_WIDTH = 400
 SCREEN_HEIGHT = 600
 SPEED = 5
 SCORE = 0
+COIN_SCORE = 0
+COIN_SPEED = 5
 
 #Setting up Fonts
 font = pygame.font.SysFont("Verdana", 60)
@@ -51,6 +53,30 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.top = 0
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
+class Coin(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        
+        # 1. Загружаем оригинальное огромное изображение
+        original_image = pygame.image.load("coin2.png") 
+        
+        # 2. Устанавливаем желаемый размер (например, 35x35 пикселей)
+        DEFAULT_COIN_SIZE = (35, 35) 
+        
+        # 3. Трансформируем (масштабируем) изображение
+        self.image = pygame.transform.scale(original_image, DEFAULT_COIN_SIZE)
+        
+        self.rect = self.image.get_rect()
+        self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
+
+    def move(self):
+        self.rect.move_ip(0, COIN_SPEED)
+        if self.rect.top > 600:
+            self.reset()
+
+    def reset(self):
+        self.rect.top = 0
+        self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -73,13 +99,17 @@ class Player(pygame.sprite.Sprite):
 #Setting up Sprites        
 P1 = Player()
 E1 = Enemy()
+C1 = Coin()
 
 #Creating Sprites Groups
 enemies = pygame.sprite.Group()
+coins = pygame.sprite.Group()
+coins.add(C1)
 enemies.add(E1)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(P1)
 all_sprites.add(E1)
+all_sprites.add(C1)
 
 #Adding a new User event 
 INC_SPEED = pygame.USEREVENT + 1
@@ -125,7 +155,17 @@ while True:
                 entity.kill() 
           time.sleep(2)
           pygame.quit()
-          sys.exit()        
+          sys.exit()   
+    
+    coin_text = font_small.render("Coins: " + str(COIN_SCORE), True, BLACK)
+    DISPLAYSURF.blit(coin_text, (300, 10))
+
+    
+    if pygame.sprite.spritecollide(P1, coins, False):
+        COIN_SCORE += 1
+    
+        for coin in coins:
+            coin.reset()     
         
     pygame.display.update()
     FramePerSec.tick(FPS)
