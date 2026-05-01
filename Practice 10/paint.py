@@ -210,9 +210,9 @@ def commit_shape(canvas, tool, start, end, color, radius):
             pygame.draw.circle(canvas, color, (cx, cy), r, 2)
 
 
-# ================================================================
+
 #  TOOLBAR DRAWING
-# ================================================================
+
 
 def draw_toolbar(surface, mouse_pos):
     """Draw the entire left-side toolbar panel."""

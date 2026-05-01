@@ -1,0 +1,176 @@
+[
+    {
+        "name": "Berik Ualiev",
+        "email": "berik_u@kaz.kz",
+        "birthday": "1982-08-22",
+        "group": "Family",
+        "phones": [
+            "87014445566",
+            "87014445566",
+            "87014445566"
+        ]
+    },
+    {
+        "name": "Ivan Petrov",
+        "email": "petrov@office.com",
+        "birthday": "1985-07-20",
+        "group": "Work",
+        "phones": [
+            "87010001122",
+            "87271110099",
+            "87010001122",
+            "87010001122",
+            "87010001122"
+        ]
+    },
+    {
+        "name": "Aruzhan Kairat",
+        "email": "aru.k@gmail.com",
+        "birthday": "2001-02-20",
+        "group": "Friend",
+        "phones": [
+            "87084443322"
+        ]
+    },
+    {
+        "name": "Svetlana Pak",
+        "email": "s.pak@mail.ru",
+        "birthday": "1987-10-10",
+        "group": "Family",
+        "phones": [
+            "87772221188"
+        ]
+    },
+    {
+        "name": "Sergey Volkov",
+        "email": "serg@company.kz",
+        "birthday": "1989-12-12",
+        "group": "Work",
+        "phones": [
+            "87021115544"
+        ]
+    },
+    {
+        "name": "Kanat Islam",
+        "email": "kanat@agency.kz",
+        "birthday": "1991-03-25",
+        "group": "Work",
+        "phones": [
+            "87057778899"
+        ]
+    },
+    {
+        "name": "Damir Bolatov",
+        "email": "damir.b@work.kz",
+        "birthday": "1994-05-05",
+        "group": "Work",
+        "phones": [
+            "87013339900"
+        ]
+    },
+    {
+        "name": "Askar Amanov",
+        "email": "askar@gmail.com",
+        "birthday": "1995-03-12",
+        "group": "Friend",
+        "phones": [
+            "87011112233",
+            "87272223344",
+            "87011112233",
+            "87011112233",
+            "87011112233"
+        ]
+    },
+    {
+        "name": "Aigerim Dosova",
+        "email": "aigera@yandex.kz",
+        "birthday": "2000-01-15",
+        "group": "Friend",
+        "phones": [
+            "87071234567",
+            "87071234567",
+            "87071234567",
+            "87071234567"
+        ]
+    },
+    {
+        "name": "Mariya Sidorova",
+        "email": "mariya.s@gmail.com",
+        "birthday": "1992-09-30",
+        "group": "Other",
+        "phones": [
+            "87056667788",
+            "87056667788",
+            "87056667788",
+            "87056667788"
+        ]
+    },
+    {
+        "name": "Julia Kim",
+        "email": "j.kim@icloud.com",
+        "birthday": "1993-04-18",
+        "group": "Work",
+        "phones": [
+            "87003332211",
+            "87003332211",
+            "87003332211",
+            "87003332211"
+        ]
+    },
+    {
+        "name": "Elena Ivanova",
+        "email": "elena.i@work.kz",
+        "birthday": "1990-11-25",
+        "group": "Work",
+        "phones": [
+            "87029998877",
+            "87029998877",
+            "87029998877",
+            "87029998877"
+        ]
+    },
+    {
+        "name": "Anna Lee",
+        "email": "lee_anna@gmail.com",
+        "birthday": "1997-06-14",
+        "group": "Other",
+        "phones": [
+            "87710009988",
+            "87710009988",
+            "87710009988"
+        ]
+    },
+    {
+        "name": "Ruslan",
+        "email": "ruslan@gmail.com",
+        "birthday": "2007-12-18",
+        "group": "Friend",
+        "phones": [
+            "87007474949"
+        ]
+    },
+    {
+        "name": "Dmitry Sokolov",
+        "email": "dima_sok@mail.ru",
+        "birthday": "1988-05-10",
+        "group": "Family",
+        "phones": [
+            "87775554433",
+            "87775554433",
+            "87775554433",
+            "87775554433"
+        ]
+    },
+    {
+        "name": "Nurlan Bakyt",
+        "email": "nurlan.b@google.com",
+        "birthday": "1998-12-05",
+        "group": "Friend",
+        "phones": [
+            "87475550011",
+            "87475550011",
+            "87475550011",
+            "87475550011"
+        ]
+    }
+]

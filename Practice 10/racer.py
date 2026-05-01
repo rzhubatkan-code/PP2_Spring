@@ -24,6 +24,7 @@ SPEED = 5
 SCORE = 0
 COIN_SCORE = 0
 COIN_SPEED = 5
+N = 10
 
 #Setting up Fonts
 font = pygame.font.SysFont("Verdana", 60)
@@ -56,27 +57,23 @@ class Enemy(pygame.sprite.Sprite):
 class Coin(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        
-        # 1. Загружаем оригинальное огромное изображение
-        original_image = pygame.image.load("coin2.png") 
-        
-        # 2. Устанавливаем желаемый размер (например, 35x35 пикселей)
-        DEFAULT_COIN_SIZE = (35, 35) 
-        
-        # 3. Трансформируем (масштабируем) изображение
-        self.image = pygame.transform.scale(original_image, DEFAULT_COIN_SIZE)
-        
+        self.reset()
+
+    def reset(self):
+        self.weight = random.choice([1, 2, 3, 5])
+
+        size = 20 + (self.weight *5)
+        original_image = pygame.image.load("coin2.png")
+        self.image = pygame.transform.scale(original_image, (size, size))
+
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
     def move(self):
-        self.rect.move_ip(0, COIN_SPEED)
+        self.rect.move_ip(0, 5)
         if self.rect.top > 600:
             self.reset()
 
-    def reset(self):
-        self.rect.top = 0
-        self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -122,50 +119,63 @@ pygame.mixer.music.play(-1)
 
 #Game Loop
 while True:
-      
-    #Cycles through all events occuring  
     for event in pygame.event.get():
-        if event.type == INC_SPEED:
-              SPEED += 0.5      
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
-
+    # Отрисовка фона и счета
     DISPLAYSURF.blit(background, (0,0))
-    scores = font_small.render(str(SCORE), True, BLACK)
+    scores = font_small.render("Enemies: " + str(SCORE), True, BLACK)
+    coin_text = font_small.render("Coins: " + str(COIN_SCORE), True, BLACK)
     DISPLAYSURF.blit(scores, (10,10))
+    DISPLAYSURF.blit(coin_text, (280, 10))
 
-    #Moves and Re-draws all Sprites
+    # Движение всех объектов
     for entity in all_sprites:
         entity.move()
         DISPLAYSURF.blit(entity.image, entity.rect)
-        
 
-    #To be run if collision occurs between Player and Enemy
-    if pygame.sprite.spritecollideany(P1, enemies):
-          pygame.mixer.Sound('crash.wav').play()
-          time.sleep(1)
-                   
-          DISPLAYSURF.fill(RED)
-          DISPLAYSURF.blit(game_over, (30,250))
-          
-          pygame.display.update()
-          for entity in all_sprites:
-                entity.kill() 
-          time.sleep(2)
-          pygame.quit()
-          sys.exit()   
-    
-    coin_text = font_small.render("Coins: " + str(COIN_SCORE), True, BLACK)
-    DISPLAYSURF.blit(coin_text, (300, 10))
-
-    
+    # ПРОВЕРКА: Сбор монеты
     if pygame.sprite.spritecollide(P1, coins, False):
-        COIN_SCORE += 1
-    
+        # Получаем объект монеты, с которой столкнулись
         for coin in coins:
-            coin.reset()     
+            COIN_SCORE += coin.weight  # Прибавляем вес монеты к счету
+            
+            # 2. УСКОРЕНИЕ: Если набрали N монет, увеличиваем скорость врага
+            if COIN_SCORE % N == 0:
+                SPEED += 1
+            
+            coin.reset() # Спавним новую монету
+
+    # ПРОВЕРКА: Столкновение с врагом
+    if pygame.sprite.spritecollideany(P1, enemies):
+        # Останавливаем всё и играем звуки
+        pygame.mixer.music.stop()
+        pygame.mixer.Sound('crash.wav').play()
+        time.sleep(0.5)
         
+        try:
+            # Пытаемся включить музыку проигрыша
+            pygame.mixer.music.load("game_over.mp3")
+            pygame.mixer.music.play()
+        except:
+            pass # Если файла нет, просто идем дальше
+
+        # Отображаем картинку проигрыша
+        try:
+            game_over_bg = pygame.image.load("game_over_bg.png")
+            game_over_bg = pygame.transform.scale(game_over_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
+            DISPLAYSURF.blit(game_over_bg, (0,0))
+        except:
+            DISPLAYSURF.fill(RED) # Если картинки нет, будет красный экран
+            
+        DISPLAYSURF.blit(game_over, (30, 250))
+        pygame.display.update()
+        
+        time.sleep(4)
+        pygame.quit()
+        sys.exit()
+
     pygame.display.update()
     FramePerSec.tick(FPS)

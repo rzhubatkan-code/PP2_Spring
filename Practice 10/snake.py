@@ -18,6 +18,9 @@ BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0) 
 
 
+
+
+
 font_style = pygame.font.SysFont("bahnschrift", 25)
 big_font = pygame.font.SysFont("bahnschrift", 50)
 
